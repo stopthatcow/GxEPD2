@@ -13,7 +13,7 @@
 #define _GxEPD2_BW_H_
 
 // uncomment next line to use class GFX of library GFX_Root instead of Adafruit_GFX
-//#include <GFX.h>
+#include <GFX.h>
 
 #ifndef ENABLE_GxEPD2_GFX
 // default is off

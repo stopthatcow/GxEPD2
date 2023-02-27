@@ -59,24 +59,16 @@ void GxEPD2_EPD::init(uint32_t serial_diag_bitrate, bool initial, uint16_t reset
     digitalWrite(_cs, HIGH);
     pinMode(_cs, OUTPUT);
   }
+  _reset();
+  _pSPIx->begin();
   if (_dc >= 0)
   {
     digitalWrite(_dc, HIGH);
     pinMode(_dc, OUTPUT);
   }
-  _reset();
   if (_busy >= 0)
   {
     pinMode(_busy, INPUT);
-  }
-  _pSPIx->begin();
-  if (_busy == MISO) // may be overridden, to be verified
-  {
-    pinMode(_busy, INPUT);
-  }
-  if (_dc == MISO) // may be overridden, TTGO T5 V2.66
-  {
-    pinMode(_dc, OUTPUT);
   }
 }
 
