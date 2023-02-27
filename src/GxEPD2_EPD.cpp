@@ -47,11 +47,13 @@ void GxEPD2_EPD::init(uint32_t serial_diag_bitrate, bool initial, uint16_t reset
   _using_partial_mode = false;
   _hibernating = false;
   _reset_duration = reset_duration;
+#if !defined(DISABLE_DIAGNOSTIC_OUTPUT)
   if (serial_diag_bitrate > 0)
   {
     Serial.begin(serial_diag_bitrate);
     _diag_enabled = true;
   }
+#endif
   if (_cs >= 0)
   {
     digitalWrite(_cs, HIGH);
@@ -130,7 +132,9 @@ void GxEPD2_EPD::_waitWhileBusy(const char* comment, uint16_t busy_time)
       if (digitalRead(_busy) != _busy_level) break;
       if (micros() - start > _busy_timeout)
       {
+#if !defined(DISABLE_DIAGNOSTIC_OUTPUT)
         Serial.println("Busy Timeout!");
+#endif
         break;
       }
 #if defined(ESP8266) || defined(ESP32)
